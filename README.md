@@ -67,17 +67,35 @@ npm run test
 
 ## Test Cases (Jest & React Testing Library)
 
-### ✅ Valid Cases:
-1. **Sum of comma-separated numbers** → `1,2,3` → **Output: 6**
-2. **Sum of newline-separated numbers** → `1\n2\n3` → **Output: 6**
-3. **Supports custom delimiters** → `//;\n1;2;3` → **Output: 6**
-4. **Handles multiple lines with gaps** → `1\n\n2\n\n3` → **Output: 6**
 
-### ❌ Invalid Cases:
-1. **Empty input** → `""` → **Output: "Enter a valid number."**
-2. **Alphabets in input** → `"abc,5,def"` → **Output: "Invalid input: abc, def. Only numbers are allowed."**
-3. **Only alphabets provided** → `"xyz"` → **Output: "Alphabets are not allowed."**
-4. **Negative numbers** → `"1,-2,3,-4"` → **Output: "Negative numbers not allowed: -2, -4"**
+
+#### ✅ Valid Cases:
+- **Sum of comma-separated numbers**  
+  Input: `1,2,3` → Output: `6`
+- **Sum of newline-separated numbers**  
+  Input: `1\n2\n3` → Output: `6`
+- **Supports custom delimiters**  
+  Input: `//;\n1;2;3` → Output: `6`
+- **Handles multiple lines with gaps**  
+  Input: `1\n\n2\n\n3` → Output: `6`
+- **Ignores numbers greater than 1000**  
+  Input: `2,1001,3` → Output: `5`
+- **Supports delimiters of any length**  
+  Input: `//[***]\n1***2***3` → Output: `6`
+- **Supports multiple delimiters**  
+  Input: `//[*][%]\n1*2%3` → Output: `6`
+- **Supports multiple delimiters with length longer than one character**  
+  Input: `//[**][%%]\n1**2%%3` → Output: `6`
+
+#### ❌ Invalid Cases:
+- **Empty input**  
+  Input: `""` → Output: `"Enter a valid number."`
+- **Alphabets in input**  
+  Input: `"abc,5,def"` → Output: `"Invalid input: abc, def. Only numbers are allowed."`
+- **Only alphabets provided**  
+  Input: `"xyz"` → Output: `"Alphabets are not allowed."`
+- **Negative numbers**  
+  Input: `"1,-2,3,-4"` → Output: `"Negative numbers not allowed: -2, -4"`
 
 ---
 
