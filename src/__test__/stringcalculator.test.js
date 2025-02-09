@@ -83,4 +83,52 @@ describe("String Calculator", () => {
 
     expect(screen.getByText("Result: 6")).toBeInTheDocument();
   });
+    test("should ignore numbers greater than 1000", () => {
+      render(<StringCalculator />);
+      const input = screen.getByPlaceholderText(
+        "Enter numbers"
+      );
+      const button = screen.getByText("Calculate Sum");
+
+      fireEvent.change(input, { target: { value: "2,1001" } });
+      fireEvent.click(button);
+
+      expect(screen.getByText("Result: 2")).toBeInTheDocument();
+    });
+    test("should support delimiters of any length", () => {
+      render(<StringCalculator />);
+      const input = screen.getByPlaceholderText(
+        "Enter numbers"
+      );
+      const button = screen.getByText("Calculate Sum");
+
+      fireEvent.change(input, { target: { value: "//[***]\n1***2***3" } });
+      fireEvent.click(button);
+
+      expect(screen.getByText("Result: 6")).toBeInTheDocument();
+    });
+    test("should support multiple delimiters", () => {
+      render(<StringCalculator />);
+      const input = screen.getByPlaceholderText(
+        "Enter numbers"
+      );
+      const button = screen.getByText("Calculate Sum");
+
+      fireEvent.change(input, { target: { value: "//[*][%]\n1*2%3" } });
+      fireEvent.click(button);
+
+      expect(screen.getByText("Result: 6")).toBeInTheDocument();
+    });
+    test("should support multiple delimiters with length longer than one character", () => {
+      render(<StringCalculator />);
+      const input = screen.getByPlaceholderText(
+        "Enter numbers"
+      );
+      const button = screen.getByText("Calculate Sum");
+
+      fireEvent.change(input, { target: { value: "//[***][%%%]\n1***2%%%3" } });
+      fireEvent.click(button);
+
+      expect(screen.getByText("Result: 6")).toBeInTheDocument();
+    });
 });
